@@ -1,0 +1,25 @@
+import sys
+import os.path
+from lib.Minion import Minion
+
+HOST = "0.0.0.0"
+PORT = 10086
+
+if __name__ == "__main__":
+    currentPath = os.path.realpath(__file__)
+    dirName = os.path.dirname(currentPath)
+    logPath  = os.path.join(dirName,"log")
+    m = Minion(logPath,HOST,PORT)
+
+    args = sys.argv
+    if len(args) == 1:
+        print("Minion works ...")
+        m.work()
+    elif len(args) == 2 and args[1] == "off":
+        print("Minion rests ...")
+        m.rest()
+    else:
+        print("Usage:")
+        print("    %s\t\t- Start Minion" % args[0])
+        print("    %s off\t- Stop Minion" % args[0])
+        sys.exit(2)

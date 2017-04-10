@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Tornado Websocket</title>
+</head>
+<script>
+    var ws;
+    function onLoad() {
+        ws = new WebSocket("ws://localhost:8080/ws");
+        ws.onmessage = function(e) {
+            alert(e.data)
+        }
+    }
+
+    function sendMsg() {
+        ws.send(document.getElementById('msg').value);
+    }
+</script>
+<body onload="onLoad();">
+    Message to send:
+    <input type="text" id="msg" />
+    <input type="button" onclick="sendMsg();" value="Send" />
+
+
+</body>
+</html>
