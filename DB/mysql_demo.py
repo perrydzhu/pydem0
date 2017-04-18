@@ -3,8 +3,7 @@ import mysql.connector
 
 
 class MySQLClient:
-
-    def __init__(self,):
+    def __init__(self, ):
         self.conn = mysql.connector.MySQLConnection()
         self.conf = {
             "user": "root",
@@ -26,11 +25,11 @@ class MySQLClient:
 
 
 if __name__ == "__main__":
-    user = "Jack"
+    user = "jump3"
     sql = "SELECT 1 FROM demo2 WHERE name='{}'".format(user)
-    # ins_sql_tpl = "INSERT INTO demo2 VALUES (%s, %s)"
-    ins_sql_tpl = "INSERT INTO demo2 (name, age) VALUES " \
-        "(%(name)s, %(age)s)"
+    ins_sql_tpl = "INSERT INTO demo2 VALUES (%s, %s)"
+    # ins_sql_tpl = "INSERT INTO demo2(name, age) VALUES " \
+    #               "(%(name)s, %(age)s)"
 
     print(type(ins_sql_tpl))
 
@@ -43,11 +42,10 @@ if __name__ == "__main__":
             print("user exists")
         else:
             print("user not exist, create")
-            data = {
-                "name": user,
-                "age": 2
-            }
+            # data = {
+            #     "name": user,
+            #     "age": 100
+            # }
+            data = (user, 999)
             cur.execute(ins_sql_tpl, data)
             conn.commit()
-
-
