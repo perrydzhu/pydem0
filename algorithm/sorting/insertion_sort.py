@@ -1,16 +1,16 @@
-def insertion_sort(unsorted_list):
-    n = len(unsorted_list)
+def insertion_sort(unsorted):
+    n = len(unsorted)
     for i in range(1, n):       # range from 1 - 5
-        tmp = unsorted_list[i]  # [7|2, 4 1, 5, 3], left: sorted, right: unsorted
+        tmp = unsorted[i]  # [7|2, 4 1, 5, 3], left: sorted, right: unsorted
         slot = i
 
         # use while loop to shift element greater than "tmp"
-        while slot > 0 and unsorted_list[slot-1] > tmp:
-            unsorted_list[slot] = unsorted_list[slot-1]
+        while slot > 0 and unsorted[slot-1] > tmp:
+            unsorted[slot] = unsorted[slot - 1]
             slot -= 1
-        unsorted_list[slot] = tmp
-        print(unsorted_list)
-    return unsorted_list
+        unsorted[slot] = tmp
+        print(unsorted)
+    return unsorted
 
 
 if __name__ == '__main__':
