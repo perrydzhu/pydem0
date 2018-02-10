@@ -1,15 +1,5 @@
-import re
 
-ptn = r'\w+'
+n = 5
 
-s = 'abc'
-
-m = re.match(ptn, s)
-if m:
-    print(m.group())
-    print("match")
-else:
-    print("not match")
-
-
-
+for i in range(5):
+    print(i)
