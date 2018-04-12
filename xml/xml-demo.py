@@ -7,4 +7,6 @@ ele = root.findall('.//branches/hudson.plugins.git.BranchSpec/name')
 
 for e in ele:
     print(e.text)
+    print(e.tag)
+    print(e.attrib['haha'])
 
