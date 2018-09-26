@@ -20,7 +20,8 @@ class BookSpider(object):
                     linkAdress.encoding = "utf-8"
                     linkContent = etree.HTML(linkAdress.text)
                     # print(linkContent.xpath('//div[@class="title"]/a/text()'))
-                    print(linkContent.xpath('//div[@class="title"]/p/text()'))
+                    # print(linkContent.xpath('//div[@class="title"]/p/text()'))
+                    print(linkContent.xpath('//p[@class="subtitle"]/text()'))
             else:
                 r.raise_for_status
                 print('Failed to get the link:', self.url_tpl)
@@ -38,14 +39,18 @@ class BookSpider(object):
                     response.encoding = "utf-8"
                     html = lxml.html.fromstring(response.text)
                     booklist = html.xpath('//ul[@class="list-lined ebook-list column-list"]/li')
+                    print(len(booklist))
                     for book in booklist:
                         title = book.xpath('.//div[@class="title"]/a')[0].text_content()
-                        rating = book.xpath('.//span[@class="rating-average"]')[0].text_content()
+                        rating_element = book.xpath('.//span[@class="rating-average"]')
+                        if len(rating_element):
+                            rating = rating_element[0].text_content()
+                        else:
+                            rating = 0
+
                         author = book.xpath('.//a[@class="author-item"]')[0].text_content()
-                        print(title, rating, author)
                         output = "<<{}>>, {}, {}"
                         print(output.format(title, rating, author))
-
 
             else:
                 print('Failed to get the link:', self.url_tpl)
