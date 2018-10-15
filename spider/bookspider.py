@@ -21,7 +21,7 @@ class BookSpider(object):
                     linkContent = etree.HTML(linkAdress.text)
                     # print(linkContent.xpath('//div[@class="title"]/a/text()'))
                     # print(linkContent.xpath('//div[@class="title"]/p/text()'))
-                    print(linkContent.xpath('//p[@class="subtitle"]/text()'))
+                    print(linkContent.xpath('//div[@class="article-desc-brief"]/text()'))
             else:
                 r.raise_for_status
                 print('Failed to get the link:', self.url_tpl)
@@ -41,16 +41,20 @@ class BookSpider(object):
                     booklist = html.xpath('//ul[@class="list-lined ebook-list column-list"]/li')
                     print(len(booklist))
                     for book in booklist:
-                        title = book.xpath('.//div[@class="title"]/a')[0].text_content()
+                        # title = book.xpath('.//div[@class="title"]/a/text()')[0].text_content()
+                        title = book.xpath('.//div[@class="title"]/a/text()')[0]
                         rating_element = book.xpath('.//span[@class="rating-average"]')
                         if len(rating_element):
                             rating = rating_element[0].text_content()
                         else:
                             rating = 0
 
+                        # comments = book.xpath('.//div[@class="article-desc-brief"]')[0].text_content()
+                        comments = book.xpath('//div[@class="article-desc-brief"]/text()')[0]
+
                         author = book.xpath('.//a[@class="author-item"]')[0].text_content()
-                        output = "<<{}>>, {}, {}"
-                        print(output.format(title, rating, author))
+                        output = "<<{}>>, {}, {}, {}"
+                        print(output.format(title, rating, author, comments))
 
             else:
                 print('Failed to get the link:', self.url_tpl)
