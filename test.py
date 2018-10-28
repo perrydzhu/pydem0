@@ -1,5 +1,3 @@
-
-n = 5
-
-for i in range(5):
-    print(i)
+l = range(10)
+print(l)
+print(l[-3::-1])
